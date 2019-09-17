@@ -1,5 +1,5 @@
 
-import {impotSchema, importSchema} from 'graphql-import'; // importar el schema
+import {importSchema, importSchema} from 'graphql-import'; // importar el schema
 
 const typeDefs = importSchema('data/schema.graphql') // importar el archivo 
 
