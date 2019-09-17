@@ -1,6 +1,3 @@
-import {buildSchema} from 'graphql';
-
-const schema = buildSchema(`
 type Cliente {
     id: ID
     nombre: String
@@ -26,6 +23,7 @@ enum TipoCliente {
     PREMIUM
 }
 type Query {
+    getClientes(limite:Int) : [Cliente]
     getCliente(id:ID):Cliente
  }
 input PedidoInput{
@@ -54,6 +52,6 @@ type Mutation {
     """ Te permite crear nuevos clientes"""
     #Nombre del Resolver , Input con datos y valor que Retorna
 crearCliente(input: ClienteInput) : Cliente
+actualizarCliente(input: ClienteInput) :Cliente
+eliminarCliente (id: ID!): String
 }
-`);
-export default schema;
