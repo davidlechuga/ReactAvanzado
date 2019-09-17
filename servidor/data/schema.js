@@ -1,8 +1,7 @@
-import {resolvers} from './resolver';
-import {impotSchema, importSchema} from 'graphql-import';
-import {makeExecutableSchema} from 'graphql-tools';
 
-const typeDefs = importSchema('data/schema.graphql')
- const schema = makeExecutableSchema({typeDefs, resolvers});
+import {impotSchema, importSchema} from 'graphql-import'; // importar el schema
 
- export {schema};
+const typeDefs = importSchema('data/schema.graphql') // importar el archivo 
+
+ export {typeDefs}; //  exportar los DEFS
+ 

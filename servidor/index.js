@@ -1,25 +1,16 @@
 import express from 'express';
 //graphql
-import graphqlHTTP from 'express-graphql'
-//SCHEMA
-import {schema} from './data/schema';
+import {ApolloServer} from 'apollo-server-express'
 
+//tyDEFS
+import {typeDefs} from './data/schema' ; //  importar  los DEFS
+import {resolvers} from './data/resolver';
 
-// express aplication
-const app = express();
+const app = express ();
+const server = new ApolloServer({typeDefs,resolvers});
 
-app.get('/', (req,res) => {
-    res.send('Todo listo')
-});
+server.applyMiddleware({app});
 
-app.use('/graphql', graphqlHTTP({
-    // que schema se esta utilizando
-    schema,
-   
-    //utilizar graphiql
-    graphiql: true
-}))
-
-app.listen (8080, () => {
-     console.log("listennig on port 8080")
-})
+app.listen({port:4000}, () => 
+    console.log(`El servidor esta corriendo en http://localhost:4000${server.graphqlPath}`
+))
