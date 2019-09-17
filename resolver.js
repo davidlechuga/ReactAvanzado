@@ -12,7 +12,6 @@ class Cliente {
         this.pedidos = pedidos;
     }
 }
-
 const clientesDB = {};
 
 //resolver 
