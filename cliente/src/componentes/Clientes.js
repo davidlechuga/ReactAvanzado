@@ -9,8 +9,8 @@ import {Link} from 'react-router-dom'
 
 const Contactos = () => {
     return (
-      <Query query={CLIENTES_QUERY}>
-        {({ loading, error, data}) => {
+      <Query query={CLIENTES_QUERY} pollInterval={500} >
+        {({ loading, error, data, stopPolling, startPolling}) => {
           if (loading) {
             return (<div>Loading...</div>);
           }
