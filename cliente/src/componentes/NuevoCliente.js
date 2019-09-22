@@ -12,8 +12,15 @@ class NuevoCliente extends Component {
             email:'',
             tipo:''
         },
-        error:false
+        error:false,
+        emails: []
     } 
+
+    nuevoCampo =() => {
+        this.setState({
+            emails: this.state.emails.concat([{email: ''}])
+        })
+    }
 
     render(){
         const {error} = this.state;
@@ -32,7 +39,7 @@ class NuevoCliente extends Component {
                     {crearCliente => (
                         <form 
                             className="col-md-8 m-3" 
-                            onSubmit={ e => {
+                             onSubmit={ e => {
                                 e.preventDefault();
 
                                 const {nombre,apellido,empresa,email,edad, tipo}
@@ -96,7 +103,7 @@ class NuevoCliente extends Component {
                             </div>
                             </div>
                             <div className="form-row">
-                                <div className="form-group col-md-6">
+                                <div className="form-group col-md-12">
                                     <label>Empresa</label>
                                     <input
                                         type="text" 
@@ -112,21 +119,22 @@ class NuevoCliente extends Component {
                                         }}
                                     />
                             </div>
-                            <div className="form-group col-md-6">
-                                <label>Email</label>
-                                <input
-                                    type="email" 
-                                    className="form-control" 
-                                    placeholder="Email"
-                                    onChange= { e => {
-                                        this.setState({
-                                            cliente:{
-                                                ...this.state.cliente,
-                                                email: e.target.value
-                                            }
-                                        })
-                                    }} 
-                                />
+                            {this.state.emails.map((input,index)  =>(
+                                <div key={index} className="form-group col-md-12">
+                                    <label>correo {index+1}: </label>
+                                    <input type="emai"
+                                           placeholder="Email"
+                                           className="form-control">
+                                    </input>
+                                </div> 
+                            ))}
+                            <div className="form-group d-flex justify-content-center col-md-12">
+                                <button 
+                                    onClick={this.nuevoCampo}
+                                    type="button" 
+                                    className="btn btn-warning">
+                                    + Agregar EMail
+                                </button>
                             </div>
                             </div>
                             <div className="form-row">
