@@ -22,6 +22,12 @@ class NuevoCliente extends Component {
         })
     }
 
+    quitarCampo = i => () => { 
+        this.setState({
+            emails:this.state.emails.filter((email,index)=> i !== index )
+        })
+    }
+
     render(){
         const {error} = this.state;
         let respuesta = (error) ? <p className="alert alert-danger p-3 text-center">
@@ -122,10 +128,22 @@ class NuevoCliente extends Component {
                             {this.state.emails.map((input,index)  =>(
                                 <div key={index} className="form-group col-md-12">
                                     <label>correo {index+1}: </label>
-                                    <input type="emai"
-                                           placeholder="Email"
-                                           className="form-control">
-                                    </input>
+
+                                    <div className="input-group">
+                                        <input 
+                                             type="emai"
+                                             placeholder="Email"
+                                             className="form-control">
+                                        </input>
+
+                                        <div className="input-group-append">
+                                            <button
+                                                onClick={this.quitarCampo(index)}
+                                                type="button"
+                                                className="btn btn-danger"
+                                            > &times;Eliminar </button> 
+                                        </div>    
+                                    </div>    
                                 </div> 
                             ))}
                             <div className="form-group d-flex justify-content-center col-md-12">
@@ -153,6 +171,7 @@ class NuevoCliente extends Component {
                                             })
                                         }}
                                     />
+
                                 </div>
                                 <div className="form-group col-md-6">
                                     <label>Tipo Cliente</label>  
