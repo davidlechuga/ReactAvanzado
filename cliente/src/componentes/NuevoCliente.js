@@ -16,6 +16,21 @@ class NuevoCliente extends Component {
         emails: []
     } 
 
+
+    leerCampo = i => e => {
+        const nuevoEmail = 
+        this.state.emails.map((email,index) => {
+            if (i !== index) return index;
+            return {
+                ...email,
+                email: e.target.value
+            }
+        });
+        this.setState({
+            emails: nuevoEmail
+        })
+    }
+
     nuevoCampo =() => {
         this.setState({
             emails: this.state.emails.concat([{email: ''}])
@@ -27,6 +42,7 @@ class NuevoCliente extends Component {
             emails:this.state.emails.filter((email,index)=> i !== index )
         })
     }
+
 
     render(){
         const {error} = this.state;
@@ -127,14 +143,15 @@ class NuevoCliente extends Component {
                             </div>
                             {this.state.emails.map((input,index)  =>(
                                 <div key={index} className="form-group col-md-12">
-                                    <label>correo {index+1}: </label>
+                                    <label>correo {index + 1}: </label>
 
                                     <div className="input-group">
                                         <input 
-                                             type="emai"
+                                             onChange={this.leerCampo(index)}
+                                             type="email"
                                              placeholder="Email"
-                                             className="form-control">
-                                        </input>
+                                             className="form-control"
+                                         />
 
                                         <div className="input-group-append">
                                             <button
@@ -142,8 +159,8 @@ class NuevoCliente extends Component {
                                                 type="button"
                                                 className="btn btn-danger"
                                             > &times;Eliminar </button> 
-                                        </div>    
-                                    </div>    
+                                        </div>
+                                    </div>
                                 </div> 
                             ))}
                             <div className="form-group d-flex justify-content-center col-md-12">
